@@ -30,6 +30,6 @@ class YesNoModel {
 
     Messages toMessageEntitie() => Messages(
       text: answer == 'yes'? 'Si' : 'No', 
-      fromWho: FromWho.AMLOs,
+      fromWho: FromWho.Songoku,
       imageUrl: image);
 }

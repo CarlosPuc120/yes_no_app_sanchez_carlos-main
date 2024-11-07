@@ -1,5 +1,5 @@
 
-enum FromWho { mine, AMLOs }
+enum FromWho { mine, Songoku }
 
 class Messages {
   final String text;

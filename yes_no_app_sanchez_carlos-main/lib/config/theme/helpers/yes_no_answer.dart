@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:yes_no_app_sanchez_carlos/domain/entities/messages.dart';
 import 'package:yes_no_app_sanchez_carlos/infrastructure/models/yes_no_model.dart';
@@ -16,4 +15,4 @@ class GetYesNoanswer {
     return yesnomodel.toMessageEntitie();
 
    }
- }
+ }//LOL

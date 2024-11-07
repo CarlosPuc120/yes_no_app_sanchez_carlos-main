@@ -1,49 +1,44 @@
-
 import 'package:flutter/material.dart';
 import 'package:yes_no_app_sanchez_carlos/config/theme/helpers/yes_no_answer.dart';
 import 'package:yes_no_app_sanchez_carlos/domain/entities/messages.dart';
 
-class ChatProvider extends ChangeNotifier{
+class ChatProvider extends ChangeNotifier {
   
-  final ScrollController chatScrollcontroler = ScrollController();
+  final ScrollController chatScrollController = ScrollController();
   final GetYesNoanswer getYesNoanswer = GetYesNoanswer();
 
-  List<Messages> message = [
-    Messages(text: 'Buen dia', fromWho: FromWho.mine),
-    Messages(text: 'hola', fromWho: FromWho.mine)
+  List<Messages> messages = [
+    Messages(text: 'Buen día', fromWho: FromWho.mine),
+    Messages(text: 'Hola', fromWho: FromWho.mine)
   ];
 
-  Future<void> sendMessage(String text) async{ 
-    
+  Future<void> sendMessage(String text) async { 
+    if (text.trim().isEmpty) return; // Evita enviar mensajes vacíos o solo espacios
+
     final newMessage = Messages(text: text, fromWho: FromWho.mine);
-    message.add(newMessage);
+    messages.add(newMessage);
+    print('Cantidad de mensajes: ${messages.length}'); // Imprime la cantidad de mensajes
 
-    if (text.endsWith('?')){ 
-       amloReply();
-     }
+    if (text.endsWith('?')) { 
+      await amloReply();
+    }
     notifyListeners();
     moveScrollToBottom();
-
-   }
-
-
-  Future<void> amloReply() async { 
-    final AMLOMessage = await getYesNoanswer.getAnswer();
-    message.add(AMLOMessage);
-    notifyListeners();
-    moveScrollToBottom();
-
-   }
-
-  void moveScrollToBottom(){ 
-
-    chatScrollcontroler.animateTo(
-      //extender el scroll lo maximo que se mueva
-    chatScrollcontroler.position.maxScrollExtent,
-    duration: const Duration(seconds: 1), 
-    curve: Curves.easeOut);
-
   }
 
+  Future<void> amloReply() async { 
+    final SongokuMessage = await getYesNoanswer.getAnswer();
+    messages.add(SongokuMessage);
+    print('Cantidad de mensajes: ${messages.length}'); // Imprime la cantidad de mensajes
+    notifyListeners();
+    moveScrollToBottom();
+  }
 
+  void moveScrollToBottom() { 
+    chatScrollController.animateTo(
+      chatScrollController.position.maxScrollExtent,
+      duration: const Duration(seconds: 1), 
+      curve: Curves.easeOut,
+    );
+  }
 }

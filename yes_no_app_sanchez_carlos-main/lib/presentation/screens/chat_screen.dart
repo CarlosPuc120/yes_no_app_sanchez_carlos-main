@@ -31,20 +31,21 @@ class _chatview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   final chatprovider = context.watch<ChatProvider>(); 
-
+   final chatprovider = context.watch<ChatProvider>();
+   
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            Expanded(child:ListView.builder(
-              controller: chatprovider.chatScrollcontroler,
-              itemCount: chatprovider.message.length,
+            Expanded(
+              child:ListView.builder(
+              controller: chatprovider.chatScrollController,
+              itemCount: chatprovider.messages.length,
               itemBuilder: (context, index) {
-                final message = chatprovider.message[index];
+                final message = chatprovider.messages[index];
               
-                return (message.fromWho == FromWho.AMLOs)
+                return (message.fromWho == FromWho.Songoku)
                   ? SongokuMessage(message: message)
                   : MyMessage(message: message,); 
             },)),
