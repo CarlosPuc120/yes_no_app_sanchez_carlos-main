@@ -12,7 +12,7 @@ class GetYesNoanswer {
 
     final yesnomodel = YesNoModel.fromJsonMap(response.data);
 
-    return yesnomodel.toMessageEntitie();
+    return yesnomodel.toMessageEntity();
 
    }
  }//LOL

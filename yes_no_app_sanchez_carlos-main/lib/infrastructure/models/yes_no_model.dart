@@ -3,6 +3,7 @@
 //     final yesNoModel = yesNoModelFromJson(jsonString);
 
 import 'package:yes_no_app_sanchez_carlos/domain/entities/messages.dart';
+import 'package:intl/intl.dart';
 
 
 class YesNoModel {
@@ -28,8 +29,13 @@ class YesNoModel {
         "image": image,
     };
 
-    Messages toMessageEntitie() => Messages(
-      text: answer == 'yes'? 'Si' : 'No', 
+     Messages toMessageEntity() => Messages(
+      text: answer == 'yes'
+          ? 'Si'
+          : answer == 'no'
+              ? 'No'
+              : 'Quizás',
       fromWho: FromWho.Songoku,
-      imageUrl: image);
+      imageUrl: image,
+      time: DateFormat('hh:mm a').format(DateTime.now()));
 }

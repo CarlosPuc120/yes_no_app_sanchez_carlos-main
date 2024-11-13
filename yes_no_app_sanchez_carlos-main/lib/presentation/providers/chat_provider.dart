@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app_sanchez_carlos/config/theme/helpers/yes_no_answer.dart';
 import 'package:yes_no_app_sanchez_carlos/domain/entities/messages.dart';
+import 'package:intl/intl.dart';
 
 class ChatProvider extends ChangeNotifier {
   
@@ -8,14 +9,15 @@ class ChatProvider extends ChangeNotifier {
   final GetYesNoanswer getYesNoanswer = GetYesNoanswer();
 
   List<Messages> messages = [
-    Messages(text: 'Buen día', fromWho: FromWho.mine),
-    Messages(text: 'Hola', fromWho: FromWho.mine)
+    Messages(text: 'Buen día', fromWho: FromWho.mine, 
+    time: DateFormat('hh:mm a').format(DateTime.now())),
+    Messages(text: 'Hola', fromWho: FromWho.mine,time: DateFormat('hh:mm a').format(DateTime.now()))
   ];
 
   Future<void> sendMessage(String text) async { 
     if (text.trim().isEmpty) return; // Evita enviar mensajes vacíos o solo espacios
 
-    final newMessage = Messages(text: text, fromWho: FromWho.mine);
+    final newMessage = Messages(text: text, fromWho: FromWho.mine, time: DateFormat('hh:mm a').format(DateTime.now()));
     messages.add(newMessage);
     print('Cantidad de mensajes: ${messages.length}'); // Imprime la cantidad de mensajes
 

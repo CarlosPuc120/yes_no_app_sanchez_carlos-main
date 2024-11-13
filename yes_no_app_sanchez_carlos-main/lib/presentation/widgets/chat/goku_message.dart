@@ -30,7 +30,7 @@ class SongokuMessage extends StatelessWidget {
 
         //imagen 
          _iamgebuble(message.imageUrl!),
-         const SizedBox(height: 15),
+         const SizedBox(height: 20),
         
 
       ],
